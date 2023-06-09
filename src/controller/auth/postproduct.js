@@ -1,18 +1,21 @@
-const ProductModel=require('../../model/server')
+const db = require('../../model/server');
+const ProductModel=db.ProductModel;
 
-postproduct=(req, res) => {
-    const { productname, price } = req.body;
+const postProduct = async (req, res) => {
+  const { productname, price } = req.body;
+  
+  try {
     const data = new ProductModel({
-      productname: productname,
-      price: price,
-      status:'pending'
+      productname,
+      price,
+      status: 'pending'
     });
     
-    data.save().then((value) => {
-        res.send(value);
-      })
-      .catch(() => {
-        res.send('An error occurred');
-      });
+    const savedProduct = await data.save();
+    res.json(savedProduct);
+  } catch (err) {
+    res.status(500).json({ error: 'Error saving the product' });
   }
-  module.exports=postproduct
+};
+
+module.exports = postProduct;

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const productSchema=require('./productsch')
 const adminSchema=require('./adminProduct')
+const userSchema=require('./usermodel')
+
 
 require('dotenv').config();
 
@@ -20,7 +22,9 @@ mongoose
 
 console.log("hi")
   const ProductModel = mongoose.model('productcollection', productSchema);
-  const AdminModel = mongoose.model('productcollection', adminSchema);
+  const AdminModel = mongoose.model('admincollection', adminSchema);
+  const UserModel = mongoose.model('usercollection', userSchema);
 
 
-  module.exports={ProductModel,AdminModel};
+
+  module.exports={ProductModel,AdminModel,UserModel};

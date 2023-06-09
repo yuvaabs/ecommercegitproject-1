@@ -1,11 +1,16 @@
-const ProductModel=require('../../model/server')
+const db = require('../../model/server');
+const ProductModel=db.ProductModel;
 
 seeproduct=async (req, res) => {
-    await ProductModel.find({}).then((data) => {
+  try{
+    const data=await ProductModel.find({ status: { $ne: 'sold' } })
         res.send(data);
-      })
-      .catch(() => {
+      
+    }
+    catch(err){
+      
         res.send('An error occurred');
-      });
+    }
+     
   }
   module.exports=seeproduct;
