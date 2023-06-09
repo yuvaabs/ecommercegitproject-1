@@ -1,24 +1,11 @@
-const mongoose = require('mongoose');
+const AdminSchema = {
+  productname: String,
+  price: Number,
+  status:String
+};
 
-const productSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  isApproved: {
-    type: Boolean,
-    default: false,
-  },
-});
 
-const Product = mongoose.model('Product', productSchema);
 
-module.exports = Product;
+
+
+module.exports = AdminSchema;

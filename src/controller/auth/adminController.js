@@ -1,9 +1,9 @@
-const Product = require('../../model/adminProduct');
+const AdminModel = require('../../model/server')
 
 // Get all products awaiting approval
 exports.getPendingProducts = async (req, res) => {
   try {
-    const pendingProducts = await Product.find({ isApproved: false });
+    const pendingProducts = await AdminModel.find({ isApproved: false });
     res.json(pendingProducts);
   } catch (error) {
     res.status(500).json({ error: 'Error retrieving pending products' });
@@ -13,7 +13,7 @@ exports.getPendingProducts = async (req, res) => {
 // Approve a product
 exports.approveProduct = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.productId);
+    const product = await AdminModel.findById(req.params.productId);
     if (!product) {
       return res.status(404).json({ error: 'Product not found' });
     }
