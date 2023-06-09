@@ -4,10 +4,12 @@ app.use(express.json());
 
 const productpost = require('./src/routes/insertproduct');
 const getproduct = require('./src/routes/getproduct');
-
+const adminRoutes = require('./src/routes/adminRoutes')
 
 app.use(productpost);
 app.use(getproduct);
+app.use(adminRoutes);
+
 
 
 
