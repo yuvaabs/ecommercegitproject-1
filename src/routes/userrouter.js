@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require('../controller/auth/usercontroller');
 
 // Get all pending products
-router.get('/buyproduct/:productname', userController.buyproduct);
+router.post('/buyproduct', userController.buyproduct);
 
 
 

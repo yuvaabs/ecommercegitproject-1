@@ -1,3 +1,4 @@
+const { producerID } = require('../../model/productsch');
 const db = require('../../model/server');
 const AdminModel=db.AdminModel;
 const ProductModel=db.ProductModel;
@@ -9,7 +10,7 @@ const UserModel=db.UserModel;
 // Get all products awaiting approval
 exports.getPendingProducts = async (req, res) => {
   try {
-    const pendingProducts = await AdminModel.find({ status: { $in: [ 'pending'] }});
+    const pendingProducts = await AdminModel.find({ status: { $eq: 'approved' }} );
     res.json(pendingProducts);
   } catch (error) {
     res.status(500).json({ error: 'Error retrieving pending products' });
@@ -19,9 +20,11 @@ exports.getPendingProducts = async (req, res) => {
 exports.approve = async (req, res) => {
   try {
     const productname = req.params.productname;
+    const producerID = req.params.producerID;
+    
     
     // Update the document in the ProductModel collection
-    const updatedProduct = await ProductModel.findOneAndUpdate({productname:productname},
+    const updatedProduct = await ProductModel.findOneAndUpdate({$and:[{productname:productname},{producerID:producerID}]},
       { $set: { status: 'approved' } },
       { new: true }
     );
@@ -38,14 +41,14 @@ exports.approve = async (req, res) => {
 
     
 
-    res.send('Document moved successfully');
+    res.send('Approver successfully');
   } catch (err) {
     console.error('An error occurred:', err);
     res.send('An error occurred');
   }
 };
 
-async function moveDocument() {
+/*async function moveDocument() {
   try {
     const documentId= req.params.productId;
     const document = await ProductModel.findById(documentId).exec();
@@ -67,5 +70,5 @@ async function moveDocument() {
     mongoose.connection.close();
     console.log('MongoDB connection closed');
   }
-}
+}*/
 

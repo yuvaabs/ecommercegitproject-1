@@ -7,7 +7,9 @@ const UserModel=db.UserModel;
 exports.buyproduct=async (req, res) => {
 
     try{
-    const productname = req.params.productname;
+    const productname = req.body.productname;
+    const user = req.body.user;
+    
   
     
     await ProductModel.findOneAndUpdate(
@@ -15,13 +17,20 @@ exports.buyproduct=async (req, res) => {
         { $set: { status: 'sold' } },
         { new: true }
       )
-      const updatedProduct = await AdminModel.findOneAndUpdate({productname:productname},
+      const userProduct = await AdminModel.findOneAndUpdate({productname:productname},
         { $set: { status: 'sold' } },
         { new: true }
       );
-      const createdAdminDocument = await UserModel.insertMany(updatedProduct);
-      console.log('Document inserted into the destination collection:', createdAdminDocument);
-    res.json({ message: 'Product sold successfully' });
+      const data = new UserModel({
+        productname:userProduct.productname,
+        price:userProduct.price,
+        status: 'pending',
+        user:user
+      });
+      
+      const savedProduct = await data.save();
+      res.json({ message: 'Product sold successfully' });
+      
     }
     catch(err){
       

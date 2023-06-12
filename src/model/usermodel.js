@@ -1,7 +1,8 @@
 const userSchema = {
     productname: String,
     price: Number,
-    status:String
+    status:String,
+    user:String
   };
 
   module.exports=userSchema

@@ -3,7 +3,7 @@ const ProductModel=db.ProductModel;
 
 seeproduct=async (req, res) => {
   try{
-    const data=await ProductModel.find({ status: { $ne: 'sold' } })
+    const data=await ProductModel.find({ status: { $ne: 'sold' } },{__v:0})
         res.send(data);
       
     }
@@ -14,3 +14,6 @@ seeproduct=async (req, res) => {
      
   }
   module.exports=seeproduct;
+  
+
+  

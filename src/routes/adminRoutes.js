@@ -8,7 +8,7 @@ router.get('/products/approve', adminController.getPendingProducts);
 
 
 
-router.get('/approveproduct/:productname', adminController.approve);
+router.get('/approveproduct/:productname/:producerID', adminController.approve);
 
 
 

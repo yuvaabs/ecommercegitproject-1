@@ -1,13 +1,15 @@
 const db = require('../../model/server');
 const ProductModel=db.ProductModel;
+const ObjectId=db.ObjectId
 
 const postProduct = async (req, res) => {
-  const { productname, price } = req.body;
+  const { productname, price,producerID } = req.body;
   
   try {
     const data = new ProductModel({
-      productname,
-      price,
+      productname:productname,
+      price:price,
+      producerID:new ObjectId(producerID),
       status: 'pending'
     });
     
@@ -15,6 +17,7 @@ const postProduct = async (req, res) => {
     res.json(savedProduct);
   } catch (err) {
     res.status(500).json({ error: 'Error saving the product' });
+    console.log(err)
   }
 };
 

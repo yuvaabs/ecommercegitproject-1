@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 const productSchema=require('./productsch')
 const adminSchema=require('./adminProduct')
 const userSchema=require('./usermodel')
+const producerSchema=require('./producersch')
+
 
 
 require('dotenv').config();
@@ -21,10 +24,12 @@ mongoose
   });
 
 console.log("hi")
+  const producertModel = mongoose.model('producercollection', producerSchema);
+
   const ProductModel = mongoose.model('productcollection', productSchema);
   const AdminModel = mongoose.model('admincollection', adminSchema);
   const UserModel = mongoose.model('usercollection', userSchema);
 
 
 
-  module.exports={ProductModel,AdminModel,UserModel};
+  module.exports={ProductModel,producertModel,AdminModel,UserModel,ObjectId};
