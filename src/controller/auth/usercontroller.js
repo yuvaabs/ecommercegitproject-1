@@ -24,7 +24,7 @@ exports.buyproduct=async (req, res) => {
       const data = new UserModel({
         productname:userProduct.productname,
         price:userProduct.price,
-        status: 'pending',
+        status: 'sold',
         user:user
       });
       
