@@ -7,7 +7,7 @@ seeproduct=async (req, res) => {
     var pipeline=[
       {
         $match: {
-          status: "approved"
+          status: "pending"
         }
       },
       { $lookup:
