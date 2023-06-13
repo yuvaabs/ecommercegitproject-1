@@ -19,8 +19,8 @@ exports.getPendingProducts = async (req, res) => {
 
 exports.approve = async (req, res) => {
   try {
-    const productname = req.params.productname;
-    const producerID = req.params.producerID;
+    const productname = req.body.productname;
+    const producerID = req.body.producerID;
     
     
     // Update the document in the ProductModel collection

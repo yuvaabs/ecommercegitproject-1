@@ -3,13 +3,19 @@ const ProductModel=db.ProductModel;
 
 seeproduct=async (req, res) => {
   try{
-    const data=await ProductModel.find({ status: { $ne: 'sold' } },{__v:0})
-    var pipeline=[{ $lookup:
+    const data=await ProductModel.find({status: { $eq:"pending" } },{__v:0})
+    var pipeline=[
+      {
+        $match: {
+          status: "approved"
+        }
+      },
+      { $lookup:
       {
          from: "producercollections",
          localField: "producerID",
          foreignField: "_id",
-         as: "Producer"
+         as: "Producerdetail"
       }
   }]
         const val=ProductModel.aggregate(pipeline).then(result => {
