@@ -1,16 +1,17 @@
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 const userSchema = {
     productname: {
       type:String,
       required: true} ,
     price: {
-      type:Number,
-      required: true} ,
+      type:Number} ,
     status:{
-      type:String,
-      required: true} ,
-    user:{
-      type:String,
-      required: true
+      type:String} ,
+    userid:{
+      type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'users'
     },
       date:{type:Date,
       default:()=>Date.now()

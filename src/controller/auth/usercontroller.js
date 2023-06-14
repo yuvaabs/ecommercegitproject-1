@@ -2,13 +2,35 @@ const db = require('../../model/server');
 const AdminModel=db.AdminModel;
 const ProductModel=db.ProductModel;
 const UserModel=db.UserModel;
+const UdModel=db.UdModel
+const ObjectId=db.ObjectId;
+
+
+exports.adduser=async(req,res)=>{
+  try{
+    const {username,age,address}=req.body
+    const data = new UdModel({
+      username,
+      age,
+      address
+
+    })
+    const val=await data.save()
+    res.send(val)
+
+
+  }
+  catch(err){
+    res.status(404).send("failed to add user")
+  }
+}
 
 
 exports.buyproduct=async (req, res) => {
 
     try{
     const productname = req.body.productname;
-    const user = req.body.user;
+    const userid = req.body.userid;
     
   
     
@@ -25,7 +47,7 @@ exports.buyproduct=async (req, res) => {
         productname:userProduct.productname,
         price:userProduct.price,
         status: 'sold',
-        user:user
+        userid:new ObjectId(userid)
       });
       
       const savedProduct = await data.save();
