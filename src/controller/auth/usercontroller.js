@@ -61,4 +61,15 @@ exports.buyproduct=async (req, res) => {
     
     }
   }
+exports.buyedproduct=async (req,res)=>{
+    
+  try{
+    const products = await UserModel.find({}).populate('userid').select('-__v').exec();
+    res.send(products)
+  }
+  catch(err){
+    res.status(500).json({ error: 'Failed to buy product' });
+  }
+
+}
   

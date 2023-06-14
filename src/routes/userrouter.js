@@ -8,6 +8,9 @@ router.post('/adduser', userController.adduser);
 
 router.post('/buyproduct', userController.buyproduct);
 
+router.get('/seebuyedproduct', userController.buyedproduct);
+
+
 
 
 
