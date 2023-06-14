@@ -1,6 +1,10 @@
 const productSchema = {
-    producername: String,
-    address: String,
+    producername:{
+      type:String,
+      required: true} ,
+    address: {
+      type:String,
+      required: true} 
     
   };
 

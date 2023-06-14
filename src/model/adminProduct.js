@@ -1,7 +1,13 @@
 const AdminSchema = {
-  productname: String,
-  price: Number,
-  status:String
+  productname: {
+    type:String,
+    required: true} ,
+  price: {
+    type:Number,
+    required: true} ,
+  status:{
+    type:String,
+    required: true} 
 };
 
 
