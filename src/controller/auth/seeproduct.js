@@ -1,10 +1,13 @@
 const db = require('../../model/server');
 const ProductModel=db.ProductModel;
+const ProducerModel=db.producertModel
 
 seeproduct=async (req, res) => {
   try{
-    const data=await ProductModel.find({status: { $eq:"pending" } },{__v:0})
-    var pipeline=[
+    const products = await ProductModel.find({}).populate('producerID').exec();
+    res.send(products)
+
+  /*  var pipeline=[
       {
         $match: {
           status: "pending"
@@ -23,7 +26,7 @@ seeproduct=async (req, res) => {
         })
         .catch(error => {
           console.error(error);
-        });
+        });*/
         
       
     }

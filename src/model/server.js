@@ -3,7 +3,7 @@ const { ObjectId } = mongoose.Types;
 const productSchema=require('./productsch')
 const adminSchema=require('./adminProduct')
 const userSchema=require('./usermodel')
-const producerSchema=require('./producersch')
+const providerSchema=require('./producersch')
 
 
 
@@ -24,7 +24,7 @@ mongoose
   });
 
 console.log("hi")
-  const producertModel = mongoose.model('producercollection', producerSchema);
+  const producertModel = mongoose.model('producercollection', providerSchema);
 
   const ProductModel = mongoose.model('productcollection', productSchema);
   const AdminModel = mongoose.model('admincollection', adminSchema);

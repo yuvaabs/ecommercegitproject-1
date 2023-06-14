@@ -1,12 +1,16 @@
-const productSchema = {
-    producername:{
-      type:String,
-      required: true} ,
-    address: {
-      type:String,
-      required: true} 
-    
-  };
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
+const providerSchema = new mongoose.Schema({
+  producername: {
+    type: String,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
+  }
+});
 
   
-  module.exports=productSchema
+  module.exports=providerSchema
