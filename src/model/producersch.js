@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const providerSchema = new mongoose.Schema({
+const providerSchema = new Schema({
   producername: {
     type: String,
     required: true

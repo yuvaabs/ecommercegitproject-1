@@ -4,7 +4,7 @@ const ProducerModel=db.producertModel
 
 seeproduct=async (req, res) => {
   try{
-    const products = await ProductModel.find({}).populate('producerID').exec();
+    const products = await ProductModel.find({}).populate('producerID').select('-__v').exec();
     res.send(products)
 
   /*  var pipeline=[
