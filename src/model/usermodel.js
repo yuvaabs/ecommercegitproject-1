@@ -10,7 +10,11 @@ const userSchema = {
       required: true} ,
     user:{
       type:String,
-      required: true} 
+      required: true
+    },
+      date:{type:Date,
+      default:()=>Date.now()
+    }
   };
 
   module.exports=userSchema
