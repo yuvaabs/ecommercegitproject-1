@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const postproduct=require('../controller/auth/postproduct')
+const product=require('../controller/auth/postproduct')
 
-router.post('/postproduct',postproduct);
+
+//router.get('/postproduct',product.postProduct);
+
+router.post('/verify_and_addproduct',product.verify,product.postProduct);
 
 module.exports=router;
