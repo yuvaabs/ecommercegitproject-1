@@ -6,7 +6,7 @@ const userController = require('../controller/auth/usercontroller');
 router.post('/adduser', userController.adduser);
 
 
-router.post('/buyproduct', userController.buyproduct);
+router.post('/buyproduct', userController.userverify,userController.buyproduct);
 
 router.get('/seebuyedproduct', userController.buyedproduct);
 

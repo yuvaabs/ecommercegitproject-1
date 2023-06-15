@@ -1,15 +1,52 @@
-const { producerID } = require('../../model/productsch');
+require('dotenv').config()
 const db = require('../../model/server');
 const AdminModel=db.AdminModel;
 const ProductModel=db.ProductModel;
 const UserModel=db.UserModel;
 
+const jwt = require('jsonwebtoken')
+
+const post = {
+    adminname: 'karthicbabu',
+    password: '123'
+  }
+exports.adminverfy=async (req,res)=>{
+  try{
+    const {adminname,password}=req.body
+    const admindetail={adminname:adminname,
+      password:password}
+      const accesstoken=jwt.sign(admindetail, process.env.SECRET_KEY)
+       return res.json({
+      Access_Token:accesstoken});
+  }
+  catch(err){
+      res.send("failed to login")
+  }
+}
+exports.approveadmin=async (req,res,next)=>{
+  try{
+    const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
+  if (token == null) return res.sendStatus(401).send("Token is empty")
+  const admin=jwt.verify(token,process.env.SECRET_KEY)
+  console.log(admin)
+  console.log(post)
 
 
+  if(post.adminname==admin.adminname && post.password==admin.password){
+    return next()
+  }
+  return res.send("failed to login")
+  }
+  catch(err){
+     return res.send("failed to authenticate")
+  }
+}
 
 // Get all products awaiting approval
 exports.getPendingProducts = async (req, res) => {
   try {
+    
     const pendingProducts = await AdminModel.find({ status: { $eq: 'approved' }} ).exec();
     return res.json(pendingProducts);
   } catch (error) {

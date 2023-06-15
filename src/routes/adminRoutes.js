@@ -3,12 +3,14 @@ const router = express.Router();
 const adminController = require('../controller/auth/adminController');
 
 // Get all pending products
-router.get('/products/approve', adminController.getPendingProducts);
+router.post('/admin_login', adminController.adminverfy);
+
+router.get('/products/approve',adminController.approveadmin, adminController.getPendingProducts);
 
 
 
 
-router.post('/approveproduct', adminController.approve);
+router.post('/approveproduct',adminController.approveadmin, adminController.approve);
 
 
 

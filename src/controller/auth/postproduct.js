@@ -48,7 +48,7 @@ exports.postProduct = async (req, res) => {
     return console.log(err)
   }
 };
-
+    
 
 
 
