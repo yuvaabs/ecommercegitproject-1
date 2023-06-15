@@ -15,6 +15,11 @@ app.use(getproduct);
 app.use(adminRoutes);
 app.use(userRoutes);
 app.use(producerRouts);
+app.use((err, req, res, next) => {
+  console.error(err); 
+
+  res.status(500).json({ error: 'Internal server error' });
+});
 
 
 
@@ -24,3 +29,4 @@ app.use(producerRouts);
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
   });
+
