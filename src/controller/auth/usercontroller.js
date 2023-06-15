@@ -64,7 +64,7 @@ exports.buyproduct=async (req, res) => {
 exports.buyedproduct=async (req,res)=>{
     
   try{
-    const products = await UserModel.find({}).populate('userid').select('-__v').exec();
+    const products = await UserModel.find({}).populate('userid').exec();
     return res.send(products)
   }
   catch(err){
