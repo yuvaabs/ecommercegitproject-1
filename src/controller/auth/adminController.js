@@ -10,7 +10,7 @@ const UserModel=db.UserModel;
 // Get all products awaiting approval
 exports.getPendingProducts = async (req, res) => {
   try {
-    const pendingProducts = await AdminModel.find({ status: { $eq: 'approved' }} );
+    const pendingProducts = await AdminModel.find({ status: { $eq: 'approved' }} ).exec();
     return res.json(pendingProducts);
   } catch (error) {
     return res.status(500).json({ error: 'Error retrieving pending products' });

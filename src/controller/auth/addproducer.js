@@ -18,7 +18,7 @@ exports.addproducer = async (req, res) => {
 };
 exports.getproducers = async (req, res) => {
     try {
-      const producer= await ProducerModel.find({});
+      const producer= await ProducerModel.find({}).exec();
       return  res.json(producer);
     } catch (error) {
       return res.status(500).json({ error: 'Error seeind producers' });
