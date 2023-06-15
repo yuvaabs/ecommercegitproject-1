@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const userdetailSchema = {
+const userdetailSchema = new Schema({
     username: {
       type:String,
       required: true} ,
@@ -13,6 +13,9 @@ const userdetailSchema = {
       login_date:{type:Date,
       default:()=>Date.now()
     }
-  };
+  },
+  { 
+    versionKey: false 
+  });
 
   module.exports=userdetailSchema

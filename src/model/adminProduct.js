@@ -1,4 +1,6 @@
-const AdminSchema = {
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+const AdminSchema = new Schema({
   productname: {
     type:String,
     required: true} ,
@@ -7,8 +9,11 @@ const AdminSchema = {
     required: true} ,
   status:{
     type:String,
-    required: true} 
-};
+    required: true}},
+    { 
+      versionKey: false 
+    }
+);
 
 
 

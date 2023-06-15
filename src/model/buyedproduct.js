@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const userSchema = {
+const userSchema = new Schema({
     productname: {
       type:String,
       required: true} ,
@@ -16,6 +16,10 @@ const userSchema = {
       date:{type:Date,
       default:()=>Date.now()
     }
-  };
+  },
+  { 
+    versionKey: false 
+  }
+  );
 
   module.exports=userSchema

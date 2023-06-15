@@ -14,11 +14,12 @@ const postProduct = async (req, res) => {
     });
     
     const savedProduct = await data.save();
-    res.json(savedProduct);
+    return res.json(savedProduct);
   } catch (err) {
     res.status(500).json({ error: 'Error saving the product' });
-    console.log(err)
+    return console.log(err)
   }
 };
+
 
 module.exports = postProduct;

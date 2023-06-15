@@ -16,12 +16,12 @@ exports.adduser=async(req,res)=>{
 
     })
     const val=await data.save()
-    res.send(val)
+    return res.send(val)
 
 
   }
   catch(err){
-    res.status(404).send("failed to add user")
+    return res.status(404).send("failed to add user")
   }
 }
 
@@ -51,13 +51,13 @@ exports.buyproduct=async (req, res) => {
       });
       
       const savedProduct = await data.save();
-      res.json({ message: 'Product sold successfully' });
+      return res.json({ message: 'Product sold successfully' });
       
     }
     catch(err){
       
       
-        res.status(500).json({ error: 'Failed to buy product' });
+      return res.status(500).json({ error: 'Failed to buy product' });
     
     }
   }
@@ -65,10 +65,10 @@ exports.buyedproduct=async (req,res)=>{
     
   try{
     const products = await UserModel.find({}).populate('userid').select('-__v').exec();
-    res.send(products)
+    return res.send(products)
   }
   catch(err){
-    res.status(500).json({ error: 'Failed to buy product' });
+    return res.status(500).json({ error: 'Failed to buy product' });
   }
 
 }

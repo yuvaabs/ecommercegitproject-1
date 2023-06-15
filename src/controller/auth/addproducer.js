@@ -11,16 +11,16 @@ exports.addproducer = async (req, res) => {
     });
     
     const savedProduct = await data.save();
-    res.json(savedProduct);
+     return res.json(savedProduct);
   } catch (err) {
-    res.status(500).json({ error: 'Error saving the product' });
+    return res.status(500).json({ error: 'Error saving the product' });
   }
 };
 exports.getproducers = async (req, res) => {
     try {
       const producer= await ProducerModel.find({});
-      res.json(producer);
+      return  res.json(producer);
     } catch (error) {
-      res.status(500).json({ error: 'Error seeind producers' });
+      return res.status(500).json({ error: 'Error seeind producers' });
     }
   };

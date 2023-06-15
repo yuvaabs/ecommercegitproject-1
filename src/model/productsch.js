@@ -20,7 +20,11 @@ const productSchema = new Schema({
     type: String,
     required: true
   }
-});
+},
+{ 
+  versionKey: false 
+}
+);
   
 
   module.exports=productSchema

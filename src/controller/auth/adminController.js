@@ -11,9 +11,9 @@ const UserModel=db.UserModel;
 exports.getPendingProducts = async (req, res) => {
   try {
     const pendingProducts = await AdminModel.find({ status: { $eq: 'approved' }} );
-    res.json(pendingProducts);
+    return res.json(pendingProducts);
   } catch (error) {
-    res.status(500).json({ error: 'Error retrieving pending products' });
+    return res.status(500).json({ error: 'Error retrieving pending products' });
   }
 };
 
@@ -41,10 +41,10 @@ exports.approve = async (req, res) => {
 
     
 
-    res.send('Approver successfully');
+    return res.send('Approver successfully');
   } catch (err) {
     console.error('An error occurred:', err);
-    res.send('An error occurred');
+    return res.send('An error occurred');
   }
 };
 

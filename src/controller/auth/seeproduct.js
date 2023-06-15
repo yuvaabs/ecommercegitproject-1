@@ -5,7 +5,7 @@ const ProducerModel=db.producertModel
 seeproduct=async (req, res) => {
   try{
     const products = await ProductModel.find({status:{$nin:['approved','sold']}}).populate('producerID').select('-__v').exec();
-    res.send(products)
+    return res.send(products)
 
   /*  var pipeline=[
       {
@@ -27,12 +27,14 @@ seeproduct=async (req, res) => {
         .catch(error => {
           console.error(error);
         });*/
+
+        //
         
       
     }
     catch(err){
       
-        res.send('An error occurred');
+      return res.send('An error occurred');
     }
     
   }
