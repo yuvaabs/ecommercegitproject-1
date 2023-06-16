@@ -9,6 +9,7 @@ exports.userverify=async(req,res,next)=>{
     const userlogin=UdModel.findOne({username:user.producername,password:user.password}).exec()
   
     if(userlogin){
+        req.body=user
       return next()
     }
     return res.send("failed to Login")

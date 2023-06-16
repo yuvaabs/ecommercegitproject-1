@@ -9,6 +9,7 @@ exports.approveadmin=async (req,res,next)=>{
   
   
     if(post.adminname==admin.adminname && post.password==admin.password){
+        req.body=admin;
       return next()
     }
     return res.send("failed to login")

@@ -9,6 +9,7 @@ exports.verify=async(req,res,next)=>{
     const producerlogin=ProducerModel.findOne({producername:producer.producername,password:producer.password}).exec()
   
     if(producerlogin){
+        req.body=producer
       return next()
     }
     return res.send("failed to Login")
