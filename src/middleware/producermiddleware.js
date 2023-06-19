@@ -1,3 +1,10 @@
+require('dotenv').config()
+const db = require('../model/server');
+const AdminModel=db.AdminModel;
+const ProductModel=db.ProductModel;
+const AdmindetailModel=db.AdmindetailModel;
+const ProducerModel=db.producertModel;
+const jwt = require('jsonwebtoken')
 exports.verify=async(req,res,next)=>{
     try{
   
@@ -6,16 +13,17 @@ exports.verify=async(req,res,next)=>{
     if (token == null) return res.sendStatus(401).send("Token is empty")
     const producer=jwt.verify(token,process.env.SECRET_KEY)
   
-    const producerlogin=ProducerModel.findOne({producername:producer.producername,password:producer.password}).exec()
+    const producerlogin= await ProducerModel.findOne({producername:producer.producername,password:producer.password}).exec()
   
     if(producerlogin){
-        req.body=producer
+        
       return next()
     }
     return res.send("failed to Login")
   
     }
     catch(err){
+      console.log(err)
       return res.status(404).send("failed to authenticate")
     }
   

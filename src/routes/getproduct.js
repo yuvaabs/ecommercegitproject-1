@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const adminController = require('../controller/auth/adminController');
+const admin = require('../middleware/adminapprovemiddleware');
 
 const seeproduct=require('../controller/auth/seeproduct')
 
-router.get('/getproduct',adminController.approveadmin,seeproduct);
+router.get('/getproduct',admin.approveadmin,seeproduct);
 
 module.exports=router;
+

@@ -2,46 +2,13 @@ require('dotenv').config()
 const db = require('../../model/server');
 const AdminModel=db.AdminModel;
 const ProductModel=db.ProductModel;
-const UserModel=db.UserModel;
-
+const AdmindetailModel=db.AdmindetailModel;
+const {encryptPassword,decryptPassword}=require('./encryptdcrypt')
 const jwt = require('jsonwebtoken')
 
-const post = {
-    adminname: 'karthicbabu',
-    password: '123'
-  }
-exports.adminverfy=async (req,res)=>{
-  try{
-    const {adminname,password}=req.body
-    const admindetail={adminname:adminname,
-      password:password}
-      const accesstoken=jwt.sign(admindetail, process.env.SECRET_KEY)
-       return res.json({
-      Access_Token:accesstoken});
-  }
-  catch(err){
-      res.send("failed to login")
-  }
-}
-exports.approveadmin=async (req,res,next)=>{
-  try{
-    const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
-  if (token == null) return res.sendStatus(401).send("Token is empty")
-  const admin=jwt.verify(token,process.env.SECRET_KEY)
-  console.log(admin)
-  console.log(post)
 
 
-  if(post.adminname==admin.adminname && post.password==admin.password){
-    return next()
-  }
-  return res.send("failed to login")
-  }
-  catch(err){
-     return res.send("failed to authenticate")
-  }
-}
+
 
 // Get all products awaiting approval
 exports.getPendingProducts = async (req, res) => {
@@ -58,14 +25,14 @@ exports.approve = async (req, res) => {
   try {
     const productname = req.body.productname;
     const producerID = req.body.producerID;
-    
+    console.log(productname,producerID)
     
     // Update the document in the ProductModel collection
-    const updatedProduct = await ProductModel.findOneAndUpdate({$and:[{productname:productname},{producerID:producerID}]},
+    const updatedProduct = await ProductModel.findOneAndUpdate({productname:productname,producerID:producerID},
       { $set: { status: 'approved' } },
       { new: true }
     );
-    
+    console.log(updatedProduct)
     if (!updatedProduct) {
       console.log('Document not found in the source collection');
       return;
@@ -84,6 +51,43 @@ exports.approve = async (req, res) => {
     return res.send('An error occurred');
   }
 };
+
+
+
+
+exports.addadmin = async (req, res) => {
+  const { adminname,password} = req.body;
+  
+  try {
+
+    const hashedPassword=encryptPassword(password)
+
+    const data = new AdmindetailModel({
+      adminname:adminname,
+      password:hashedPassword
+    });
+    console.log(data)
+    
+    const saveddetail = await data.save();
+    console.log(saveddetail)
+    const admindetail={adminname:saveddetail.adminname,
+    password:saveddetail.password}
+    const accesstoken=jwt.sign(admindetail, process.env.SECRET_KEY)
+     return res.json({Inserted_Detail:saveddetail,
+    Access_Token:accesstoken});
+  } catch (err) {
+    return res.status(500).json({ error: 'Error saving the product' });
+  }
+};
+exports.getadmin = async (req, res) => {
+    try {
+      const admin= await AdmindetailModel.find({}).exec();
+      return  res.json(admin);
+    } catch (error) {
+      return res.status(500).json({ error: 'Error seeing producers' });
+    }
+  };
+
 
 /*async function moveDocument() {
   try {
