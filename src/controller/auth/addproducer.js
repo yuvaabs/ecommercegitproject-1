@@ -33,8 +33,8 @@ exports.addproducer = async (req, res) => {
     const savedProducer = await data.save();
     console.log(savedProducer)
   
-    const producerdetail={producername:producername,
-    password:hashedPassword}
+    const producerdetail={_id:savedProducer._id,
+    role:'producer'}
     const accesstoken=jwt.sign(producerdetail, process.env.SECRET_KEY)
      return res.json({Inserted_Detail:savedProducer,
     Access_Token:accesstoken});

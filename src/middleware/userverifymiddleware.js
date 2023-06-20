@@ -14,7 +14,7 @@ exports.userverify=async(req,res,next)=>{
     if (token == null) return res.sendStatus(401).send("Token is empty")
     const user=jwt.verify(token,process.env.SECRET_KEY)
   
-    const userlogin=UdModel.findOne({username:user.username,password:user.password}).exec()
+    const userlogin=UdModel.findOne({_id:user._id}).exec()
   
     if(userlogin){
         

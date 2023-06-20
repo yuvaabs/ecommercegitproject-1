@@ -24,8 +24,8 @@ exports.adduser=async(req,res)=>{
     const val=await data.save()
     
     console.log(val)
-    const producerdetail={username:val.username,
-    password:val.password}
+    const producerdetail={_id:val._id,
+    role:"user"}
     const accesstoken=jwt.sign(producerdetail, process.env.SECRET_KEY)
      return res.json({Inserted_Detail:val,
     Access_Token:accesstoken});

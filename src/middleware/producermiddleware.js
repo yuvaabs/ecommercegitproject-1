@@ -13,7 +13,7 @@ exports.verify=async(req,res,next)=>{
     if (token == null) return res.sendStatus(401).send("Token is empty")
     const producer=jwt.verify(token,process.env.SECRET_KEY)
   
-    const producerlogin= await ProducerModel.findOne({producername:producer.producername,password:producer.password}).exec()
+    const producerlogin= await ProducerModel.findOne({_id:producer._id}).exec()
   
     if(producerlogin){
         

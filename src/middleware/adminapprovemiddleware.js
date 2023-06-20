@@ -15,7 +15,7 @@ exports.approveadmin=async (req,res,next)=>{
     console.log(admin)
     
   
-    const adminlogin=await AdmindetailModel.findOne({adminname:admin.adminname,password:admin.password}).exec()
+    const adminlogin=await AdmindetailModel.findOne({_id:admin._id}).exec()
 
     if(adminlogin){
        

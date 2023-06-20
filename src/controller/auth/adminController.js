@@ -70,8 +70,8 @@ exports.addadmin = async (req, res) => {
     
     const saveddetail = await data.save();
     console.log(saveddetail)
-    const admindetail={adminname:saveddetail.adminname,
-    password:saveddetail.password}
+    const admindetail={_id:saveddetail._id,
+    role:"admin"}
     const accesstoken=jwt.sign(admindetail, process.env.SECRET_KEY)
      return res.json({Inserted_Detail:saveddetail,
     Access_Token:accesstoken});
